@@ -1,0 +1,58 @@
+@startuml
+!pragma layout smetana
+skinparam dpi 160
+skinparam defaultFontName "Microsoft YaHei"
+skinparam classFontName "Microsoft YaHei"
+skinparam classFontSize 14
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam nodesep 16
+skinparam ranksep 26
+hide empty members
+hide circle
+
+class CsvExporter {
+  +layout(List<Question>, int): List<List<String>>
+  +export(List<Question>, int, Path): CsvExportResult
+  +formatCell(Question): String
+}
+
+class CsvExportResult {
+  -path: Path
+  -questionCount: int
+  -rowCount: int
+  -columnCount: int
+  +getPath(): Path
+  +getRowCount(): int
+}
+
+class ExpressionEvaluator {
+  +evaluate(String): int
+}
+
+class MainFrame {
+  -typeBox: JComboBox
+  -countField: JTextField
+  -columnField: JTextField
+  -previewTable: JTable
+  -pathField: JTextField
+  +MainFrame()
+  -onGenerate(ActionEvent): void
+  -onExport(ActionEvent): void
+}
+
+class ArithmeticExerciseApp {
+  +main(String[]): void
+}
+
+class Question
+class QuestionGenerator
+
+MainFrame ..> QuestionGenerator : 调用生成服务
+MainFrame ..> CsvExporter : 调用导出服务
+MainFrame ..> Question : 展示题目
+CsvExporter ..> Question : 读取题面与答案
+CsvExporter ..> CsvExportResult : 创建结果
+ArithmeticExerciseApp ..> MainFrame : 启动主窗口
+ExpressionEvaluator ..> Question : 测试中独立比对
+@enduml

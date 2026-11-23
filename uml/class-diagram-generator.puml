@@ -1,0 +1,66 @@
+@startuml
+!pragma layout smetana
+skinparam dpi 160
+skinparam defaultFontName "Microsoft YaHei"
+skinparam classFontName "Microsoft YaHei"
+skinparam classFontSize 14
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam nodesep 14
+skinparam ranksep 24
+hide empty members
+hide circle
+
+abstract class QuestionGenerator {
+  #random: Random
+  +generateOne(): Question
+  +generate(int): List<Question>
+  #randomBetween(int, int): int
+}
+
+abstract class PatternBasedThreeOperandGenerator {
+  -patterns: OperatorPattern[]
+  +generateOne(): Question
+}
+
+class TwoOperandAddGenerator
+
+class ThreeOperandFourMixedGenerator
+
+class RandomGenerator {
+  -candidates: QuestionGenerator[]
+  +generateOne(): Question
+}
+
+class QuestionGeneratorFactory {
+  +create(QuestionType, Random): QuestionGenerator
+}
+
+enum OperatorPattern {
+  ADD_ADD
+  ADD_SUB
+  SUB_ADD
+  SUB_SUB
+  MUL_ADD
+  MUL_SUB
+  DIV_ADD
+  DIV_SUB
+  ADD_MUL
+  ADD_DIV
+  SUB_MUL
+  SUB_DIV
+  MUL_MUL
+  MUL_DIV
+  DIV_MUL
+  DIV_DIV
+  +generate(Random): Question
+}
+
+QuestionGenerator <|-- TwoOperandAddGenerator
+QuestionGenerator <|-- PatternBasedThreeOperandGenerator
+PatternBasedThreeOperandGenerator <|-- ThreeOperandFourMixedGenerator
+QuestionGenerator <|-- RandomGenerator
+RandomGenerator o-- QuestionGenerator : 组合 11 个生成器
+QuestionGeneratorFactory ..> QuestionGenerator : 创建
+PatternBasedThreeOperandGenerator o-- OperatorPattern : 持有一组组合
+@enduml

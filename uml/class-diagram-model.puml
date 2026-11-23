@@ -1,0 +1,46 @@
+@startuml
+!pragma layout smetana
+skinparam dpi 160
+skinparam defaultFontName "Microsoft YaHei"
+skinparam classFontName "Microsoft YaHei"
+skinparam classFontSize 14
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam nodesep 16
+skinparam ranksep 26
+hide empty members
+hide circle
+
+abstract class Question {
+  #operands: int[]
+  #operators: char[]
+  +getAnswer(): int
+  +getExpression(): String
+  +getIntermediateResults(): int[]
+  #evaluate(): int
+}
+
+class TwoOperandQuestion
+
+class ThreeOperandQuestion
+
+enum QuestionType {
+  TWO_ADD
+  TWO_SUB
+  TWO_MUL
+  TWO_DIV
+  THREE_ADD
+  THREE_SUB
+  THREE_MUL
+  THREE_DIV
+  THREE_MIXED
+  THREE_MUL_DIV
+  THREE_FOUR_MIXED
+  RANDOM
+  +getDisplayName(): String
+}
+
+Question <|-- TwoOperandQuestion
+Question <|-- ThreeOperandQuestion
+note right of QuestionType : 界面下拉框与工厂使用
+@enduml

@@ -1,0 +1,13 @@
+build/
+out/
+bin/
+*.class
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+report/
+tools/plantuml.jar
+tools/_test.*
