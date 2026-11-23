@@ -122,3 +122,10 @@ java -cp "build\classes;build\test-classes;lib\junit-4.13.2.jar;lib\hamcrest-cor
 
 - 本仓库的截图均为 Windows 本机真实运行捕获，详见 `screenshots/manifest.md`。
 - UML 类图由 PlantUML 工具生成，源文件位于 `uml/`。
+
+## 11. 仓库与提交
+
+- 远程仓库：<https://github.com/Sherlock-zzuli/software-construction-lab2>（私有）
+- 分支：`main`
+- 提交信息：`feat: 实验2 四则运算扩展、CSV导出与JUnit测试`
+- 单元测试：37 个测试方法全部通过，控制台输出 `OK (37 tests)`
